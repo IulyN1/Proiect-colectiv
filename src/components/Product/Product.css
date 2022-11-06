@@ -1,0 +1,9 @@
+.Product {
+    margin: 5px;
+    width: 350px;
+    height: 350px;
+    align-items: center;
+    text-align: center;
+    background-color: #f5fbfd;
+    position: relative;
+}
