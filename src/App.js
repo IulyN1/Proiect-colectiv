@@ -1,13 +1,18 @@
 import './App.css';
 
-function App() {
+import React from 'react';
+import ProductsPage from './pages/ProductsPage';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+const App = () => {
 	return (
-		<div className="App">
-			<header className="App-header">
-				<h1>Proiect colectiv</h1>
-			</header>
-		</div>
-	);
-}
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<ProductsPage />}>
+				</Route>
+			</Routes>
+		</BrowserRouter>
+	)
+};
 
 export default App;
