@@ -1,18 +1,24 @@
-import React from "react";
+import { useState, useEffect } from 'react';
+import { Product } from '../Product/Product';
+import { allProducts } from '../../data';
+import { NO_PRODUCTS } from '../../constants';
 import './Products.css';
-import { Product } from "../Product/Product";
-import { allProducts } from "../../data";
-import { NO_PRODUCTS } from "../../constants";
 
 export const Products = () => {
-    const [products, setProducts] = React.useState(allProducts);
+	const [products, setProducts] = useState(allProducts);
 
-    return (
-        <div className="Products">
-            {products.length > 0 ? 
-            products.map((item) =>
-                <Product key={item.id} product={item}/>) 
-                : <p className="Products-none">{NO_PRODUCTS}</p>}
-        </div>
-    )
+	useEffect(() => {
+		const fetchedProducts = allProducts; // TO DO: fetch products
+		setProducts(fetchedProducts);
+	}, []);
+
+	return (
+		<div className="Products">
+			{products.length > 0 ? (
+				products.map((item) => <Product key={item.id} product={item} />)
+			) : (
+				<p className="Products-none">{NO_PRODUCTS}</p>
+			)}
+		</div>
+	);
 };
