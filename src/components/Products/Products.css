@@ -1,9 +1,9 @@
-.Products{
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
+.Products {
+	padding: 20px;
+	display: flex;
+	flex-wrap: wrap;
 }
 
-.Products-none{
-    font-size: 20px;
+.Products-none {
+	font-size: 20px;
 }
