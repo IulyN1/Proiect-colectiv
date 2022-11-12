@@ -1,0 +1,17 @@
+.ProductPage {
+	position: relative;
+	margin: 0;
+	padding-bottom: 10rem;
+	min-height: 100vh;
+}
+
+.ProductPage-navbar {
+	background-color: #50c878;
+	color: white;
+	text-align: center;
+	padding: 5px;
+}
+
+.ProductPage-title {
+	margin-left: 25px;
+}
