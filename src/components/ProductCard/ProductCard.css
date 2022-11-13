@@ -1,0 +1,25 @@
+.ProductCard {
+	margin: 5px;
+	width: 350px;
+	height: 350px;
+	align-items: center;
+	text-align: center;
+	background-color: #f5fbfd;
+	position: relative;
+}
+
+.ProductCard a {
+	text-decoration: none;
+	color: #50c878;
+	font-weight: bold;
+}
+
+.ProductCard a:hover {
+	text-decoration: underline;
+}
+
+.ProductCard .ArrowIcon {
+	padding-left: 2px;
+	position: relative;
+	top: 5px;
+}

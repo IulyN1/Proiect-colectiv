@@ -1,34 +1,42 @@
 export const allProducts = [
 	{
 		id: 1,
-		description: 'product 1'
+		name: 'product 1',
+		price: 10
 	},
 	{
 		id: 2,
-		description: 'product 2'
+		name: 'product 2',
+		price: 10
 	},
 	{
 		id: 3,
-		description: 'product 3'
+		name: 'product 3',
+		price: 10
 	},
 	{
 		id: 4,
-		description: 'product 4'
+		name: 'product 4',
+		price: 10
 	},
 	{
 		id: 5,
-		description: 'product 5'
+		name: 'product 5',
+		price: 10
 	},
 	{
 		id: 6,
-		description: 'product 6'
+		name: 'product 6',
+		price: 10
 	},
 	{
 		id: 7,
-		description: 'product 7'
+		name: 'product 7',
+		price: 10
 	},
 	{
 		id: 8,
-		description: 'product 8'
+		name: 'product 8',
+		price: 10
 	}
 ];
