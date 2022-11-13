@@ -5,13 +5,13 @@ import { Products } from '../components/Products/Products';
 import { PRODUCTS_NAVBAR, PRODUCTS_TITLE } from '../constants';
 import './ProductsPage.css';
 
-const ProductsPage = () => {
+const ProductsPage = ({ favorites }) => {
 	return (
 		<div className="ProductsPage">
 			<Navbar />
 			<div className="ProductsPage-navbar">{PRODUCTS_NAVBAR}</div>
 			<h3 className="ProductsPage-title">{PRODUCTS_TITLE}</h3>
-			<Products />
+			<Products favorites={favorites} />
 			<Footer />
 		</div>
 	);
