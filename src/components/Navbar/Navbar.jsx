@@ -3,6 +3,7 @@ import './Navbar.css';
 import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { BRAND, REGISTER, SIGN_IN } from '../../constants';
+import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
 	return (
@@ -13,7 +14,9 @@ export const Navbar = () => {
 				<SelfImprovementIcon className="Icon" />
 			</div>
 			<div className="Navbar-right">
-				<FavoriteBorderIcon className="Navbar-item" />
+				<Link to={`/products/favorites`} favorites={0}>
+					<FavoriteBorderIcon className="Navbar-item" />
+				</Link>
 				<p className="Navbar-item">{REGISTER}</p>
 				<p className="Navbar-item">{SIGN_IN}</p>
 			</div>

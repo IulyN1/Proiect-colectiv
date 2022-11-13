@@ -8,9 +8,10 @@ const App = () => {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<ProductsPage />} />
-				<Route path="/products" element={<ProductsPage />} />
+				<Route path="/" element={<ProductsPage favorites={1} />} />
+				<Route path="/products" element={<ProductsPage favorites={1} />} />
 				<Route path="/products/:id" element={<ProductPage />} />
+				<Route path="/products/favorites" element={<ProductsPage favorites={0} />} />
 			</Routes>
 		</BrowserRouter>
 	);
