@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { ProductCard } from '../ProductCard/ProductCard';
 import { allProducts, favProducts } from '../../data';
 import { NO_PRODUCTS } from '../../constants';
@@ -9,7 +8,7 @@ export const Products = ({ favorites }) => {
 	const [products, setProducts] = useState([]);
 
 	useEffect(() => {
-		var fetchedProducts;
+		let fetchedProducts;
 		favorites === 0 ? fetchedProducts = favProducts : fetchedProducts = allProducts;	//TO DO: fetch products
 		setProducts(fetchedProducts);
 	}, [favorites]);

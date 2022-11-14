@@ -12,7 +12,7 @@ export const Product = () => {
 			<p>
 				<span className="ProductFavoriteLabel">Favorite</span>
 				<span className="ProductInteractionIcon">
-					<Favorite />
+					<Favorite product={product}/>
 				</span>
 			</p>
 			<p>
