@@ -25,9 +25,20 @@ export function postFavorite(userId, product){
     request.send(payload);
 }
 
-export function postReview(userId, review){
+export function postReview(userId, productReview){
+    // NOTE : this implementation relies heavily on the REST endpoint on the backend and might require future changes
     const headers = [];
     headers.push({name: 'Content-Type', value:'application/json'});
     let request = createRequest("POST", `${userId}/review`, headers);
-    request.send(review);
+    const payload =JSON.stringify(productReview);
+    request.send(payload);
+}
+
+export async function getReviewAverage(product){
+    const headers = [];
+    headers.push({name: 'Content-Type', value:'application/json'});
+    let request = createRequest("POST", `reviews/avg`, headers);
+    const payload = JSON.stringify(product);
+    request.send(payload);
+    return await request.response;
 }

@@ -1,6 +1,7 @@
 import { Rating } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
+import {getReviewAverage, postReview} from "../API";
 
 const StyledRating = styled(Rating)({
 	'& .MuiRating-iconFilled': {
@@ -11,9 +12,12 @@ const StyledRating = styled(Rating)({
 	}
 });
 
-export const Review = ({ value }) => {
-	const [stars, setStars] = useState(value ? value : 0);
-
+export const Review = ({ product }) => {
+	const temporaryUID =1;
+	const [stars, setStars] = useState(getReviewAverage(product) ? getReviewAverage(product) :  0);
+	useEffect(() => {
+			postReview(temporaryUID, product);
+	}, [stars, setStars, product])
 	return (
 		<StyledRating
 			name="product-rating"

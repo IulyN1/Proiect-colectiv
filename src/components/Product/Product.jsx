@@ -24,7 +24,7 @@ export const Product = () => {
 			<p>
 				<span>Give a rating:</span>
 				<span className="ProductInteractionIcon">
-					<Review value={product?.review} />
+					<Review value={product} />
 				</span>
 			</p>
 		</div>
