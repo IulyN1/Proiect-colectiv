@@ -25,3 +25,9 @@
 .Product .ProductFavoriteLabel {
 	font-style: italic;
 }
+
+.ReviewList{
+	width: 200px;
+	height: 150px;
+	overflow-y: auto;
+}
