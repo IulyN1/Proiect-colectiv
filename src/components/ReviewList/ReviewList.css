@@ -1,0 +1,16 @@
+.ReviewListContainer {
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+}
+
+.ReviewList {
+	max-width: 100%;
+	list-style: '➤ ';
+}
+
+.ReviewIcon {
+	position: relative;
+	top: 5px;
+	padding-left: 2px;
+}

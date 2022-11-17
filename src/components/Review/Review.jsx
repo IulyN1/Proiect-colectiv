@@ -1,7 +1,8 @@
-import {Button, Input, Rating} from '@mui/material';
+import { Button, Input, Rating } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import {useState} from 'react';
-import {postReview} from "../../API";
+import { useState } from 'react';
+import { postReview } from '../../API';
+import './Review.css';
 
 const StyledRating = styled(Rating)({
 	'& .MuiRating-iconFilled': {
@@ -13,30 +14,39 @@ const StyledRating = styled(Rating)({
 });
 
 export const Review = ({ product }) => {
-	const temporaryUID =1;
-	const [stars, setStars] = useState( 0);
+	const temporaryUID = 1;
+	const [stars, setStars] = useState(0);
 	const [reviewText, setReviewText] = useState('');
-	/*useEffect(() => {
-			postReview(temporaryUID, productId);
-	}, [stars, setStars, productId])*/
+
+	const handleSendReview = () => {
+		if (stars > 0) {
+			postReview(temporaryUID, product?.id, stars, reviewText);
+			window.location.reload();
+		}
+	};
+
 	return (
-		<>
-			<StyledRating
-				name="product-rating"
-				value={stars}
-				onChange={(event) => {
-					setStars(parseInt(event.target.value));
-				}}
-			/>
+		<div className="RatingContainer">
+			<span>
+				Give a review:
+				<StyledRating
+					name="product-rating"
+					value={stars}
+					className="ProductRatingIcon"
+					onChange={(event) => {
+						setStars(parseInt(event.target.value));
+					}}
+				/>
+			</span>
 			<Input
-				placeholder={"Give us a review"}
-				style={{display:"block"}}
+				placeholder={'Give product a review'}
 				value={reviewText}
 				onChange={(event) => {
 					setReviewText(event.target.value);
 				}}
+				multiline={true}
 			/>
-			<Button onClick={() => postReview(temporaryUID, product?.id, reviewText)} >Send review</Button>
-		</>
+			<Button onClick={() => handleSendReview()}>Send review</Button>
+		</div>
 	);
 };

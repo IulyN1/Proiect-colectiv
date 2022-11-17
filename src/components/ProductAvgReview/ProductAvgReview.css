@@ -1,0 +1,11 @@
+.ProductAvgReview {
+	position: absolute;
+	right: 15px;
+	top: 5px;
+}
+
+.AvgReviewIcon {
+	position: relative;
+	top: 5px;
+	padding-left: 2px;
+}

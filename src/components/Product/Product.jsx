@@ -2,27 +2,20 @@ import { useLocation } from 'react-router-dom';
 import { Review } from '../Review/Review';
 import './Product.css';
 import Favorite from '../Favorite';
-import {useEffect, useState} from "react";
-import {getReviews} from "../../API";
-
+import { ReviewList } from '../ReviewList/ReviewList';
+import { ProductAvgReview } from '../ProductAvgReview/ProductAvgReview';
 
 export const Product = () => {
 	const location = useLocation();
-	const product = location.state;
-	const [reviews, setReviews] = useState([]);
-	useEffect( () => {
-		(
-			async() =>{
-			let fetchItems= await getReviews(product?.id)
-			setReviews(JSON.parse( await fetchItems.text()));
-	})()
-	},[product?.id])
+	const product = location.state.product;
+	const favorite = location.state.favorite;
+
 	return (
 		<div className="Product">
-			<p>
+			<p className="Rounded">
 				<span className="ProductFavoriteLabel">Favorite</span>
 				<span className="ProductInteractionIcon">
-					<Favorite product={product}/>
+					<Favorite product={product} favorite={favorite} />
 				</span>
 			</p>
 			<p>
@@ -31,22 +24,9 @@ export const Product = () => {
 			<p>
 				<span>Price: {product?.price}</span>
 			</p>
-			<p>
-				<span>Give a rating:</span>
-				<span className="ProductInteractionIcon">
-					<Review product={product} />
-				</span>
-			</p>
-			<p>
-				<span>Reviews</span>
-				<ul className="ReviewList">
-					{reviews.length > 0 ? (
-						reviews.map((review) => <li key={review.id} > { review.text}</li>)
-					) : (
-						<p>{"No reviews yet"}</p>
-					)}
-				</ul>
-			</p>
+			<Review product={product} />
+			<ReviewList product={product} />
+			<ProductAvgReview product={product} />
 		</div>
 	);
 };
