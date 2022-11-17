@@ -6,9 +6,10 @@
 	flex-direction: column;
 	justify-content: center;
 	background-color: #def6fe;
+	position: relative;
 }
 
-.Product p:first-child {
+.Product .Rounded {
 	border: 1px solid grey;
 	border-radius: 20px;
 	padding: 0px 10px 5px 10px;
@@ -24,10 +25,4 @@
 
 .Product .ProductFavoriteLabel {
 	font-style: italic;
-}
-
-.ReviewList{
-	width: 200px;
-	height: 150px;
-	overflow-y: auto;
 }

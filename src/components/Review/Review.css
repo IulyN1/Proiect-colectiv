@@ -1,0 +1,15 @@
+.RatingContainer {
+	width: fit-content;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid grey;
+	border-radius: 20px;
+	padding: 0px 10px 5px 10px;
+}
+
+.ProductRatingIcon {
+	cursor: pointer;
+	position: relative;
+	top: 5px;
+	padding-left: 2px;
+}
