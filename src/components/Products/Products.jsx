@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { ProductCard } from '../ProductCard/ProductCard';
-import { allProducts, favProducts } from '../../data';
 import { NO_PRODUCTS } from '../../constants';
 import './Products.css';
+import {getFavorites, getProducts} from "../../API";
 
 export const Products = ({ favorites }) => {
 	const [products, setProducts] = useState([]);
 
 	useEffect(() => {
-		var fetchedProducts;
-		favorites === 0 ? fetchedProducts = favProducts : fetchedProducts = allProducts;	//TO DO: fetch products
-		setProducts(fetchedProducts);
+		(async() =>{
+			let fetchItems= (favorites === 0 ?
+				await getFavorites(1)
+				: await getProducts()
+		)
+			setProducts(JSON.parse( await fetchItems.text()));
+		})()
 	}, [favorites]);
 
 	return (

@@ -12,7 +12,7 @@ export const Product = () => {
 			<p>
 				<span className="ProductFavoriteLabel">Favorite</span>
 				<span className="ProductInteractionIcon">
-					<Favorite />
+					<Favorite product={product}/>
 				</span>
 			</p>
 			<p>
@@ -24,7 +24,7 @@ export const Product = () => {
 			<p>
 				<span>Give a rating:</span>
 				<span className="ProductInteractionIcon">
-					<Review value={product?.review} />
+					<Review value={product} />
 				</span>
 			</p>
 		</div>
