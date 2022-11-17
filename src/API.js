@@ -11,7 +11,7 @@ function createRequest(httpMethod, path, headers){
     });
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            return xhttp.responseText;
+            console.log(xhttp.response);
         }
     };
     return xhttp;
@@ -34,11 +34,19 @@ export function postReview(userId, productReview){
     request.send(payload);
 }
 
-export async function getReviewAverage(product){
+export async function getReviewAverage(product, callback){
     const headers = [];
     headers.push({name: 'Content-Type', value:'application/json'});
-    let request = createRequest("POST", `reviews/avg`, headers);
+    let request = createRequest("POST", `reviews/avg`, headers, callback);
     const payload = JSON.stringify(product);
     request.send(payload);
-    return await request.response;
+    return request.response;
+}
+
+export async function getProducts(){
+    return await fetch(`${protocol}${SERVER_ADDRESS}${URI}products/`);
+}
+
+export async function getFavorites(userId){
+    return await fetch(`${protocol}${SERVER_ADDRESS}${URI}${userId}/favorites`);
 }
