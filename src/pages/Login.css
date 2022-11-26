@@ -1,0 +1,34 @@
+.LoginPage {
+    background-color: rgb(219, 219, 219, 0.3);
+    height: 100vh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.Login-formControl {
+    background-color: rgb(80, 200, 120, 0.8);
+    height: 65vh;
+    width: 50vh;
+    border-radius: 2cm;
+    align-items: center;
+    margin-top: 20px;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.Login-Title {
+    text-align: center;
+    font-size: 17px;
+    padding: 50px 0px 60px 0px;
+}
+
+.Login-InputField div {
+    width: 250px;
+    margin-bottom: 30px;
+}
+
+.Login-ErrorMessage {
+    color: red;
+    font-weight: bold;
+}

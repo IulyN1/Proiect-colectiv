@@ -18,7 +18,11 @@ export const Navbar = () => {
 					<FavoriteBorderIcon className="Navbar-item" />
 				</Link>
 				<p className="Navbar-item">{REGISTER}</p>
-				<p className="Navbar-item">{SIGN_IN}</p>
+				{!localStorage.getItem("userId") &&
+					<Link to={`/login`} className="Navbar-Link">
+						<p className="Navbar-item">{SIGN_IN}</p>
+					</Link>
+				}
 			</div>
 		</div>
 	);
