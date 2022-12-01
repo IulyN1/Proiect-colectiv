@@ -1,7 +1,7 @@
 import { Button, FormControl, TextField } from '@mui/material';
 import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
 import React, {useCallback} from 'react';
-import { BRAND, SIGN_IN } from '../constants';
+import {BRAND, SERVER_ADDRESS, SIGN_IN} from '../constants';
 import { useNavigate } from "react-router-dom";
 import './Login.css';
 import {login} from "../API";
@@ -13,7 +13,7 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = React.useState("");
     const navigate = useNavigate();
 
-    const handleLogin = useCallback(() => {
+    const handleLogin = async () => {
         let localErrorMessage = "";
         if (email.trim() === "" || password.trim() === "") {
             setErrorMessage("Empty fields!");
@@ -31,11 +31,12 @@ const Login = () => {
 
         if (localErrorMessage.trim() === "") {
             login(email, password).then((res)=>{
-                console.log(res);
-            }).catch();
-            // navigate("/products");
+                console.log(res === 1 ? "contul exista": "contul nu exista");
+            })
+
+            navigate("/products");
         }
-    });
+    };
 
     return (
         <div className="LoginPage">
