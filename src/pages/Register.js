@@ -13,6 +13,7 @@ import {BRAND, REGISTER} from "../constants";
 import React from 'react';
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
+import {postUser} from "../API";
 
 const Register = () => {
 
@@ -46,15 +47,8 @@ const Register = () => {
             localErrorMessage = "";
         }
 
-        let user = {
-            'Name': name,
-            'Email': email,
-            'Password': password
-        }
-
-        console.log(user);
-
         if (!localErrorMessage.trim()) {
+            postUser(name.trim(), email.trim(), password.trim());
             navigate("/products");
         }
     }
