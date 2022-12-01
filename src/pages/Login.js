@@ -1,9 +1,10 @@
 import { Button, FormControl, TextField } from '@mui/material';
 import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
-import React from 'react';
+import React, {useCallback} from 'react';
 import { BRAND, SIGN_IN } from '../constants';
 import { useNavigate } from "react-router-dom";
 import './Login.css';
+import {login} from "../API";
 
 const Login = () => {
     localStorage.clear();
@@ -12,20 +13,29 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = React.useState("");
     const navigate = useNavigate();
 
-    const handleLogin = (event) => {
+    const handleLogin = useCallback(() => {
+        let localErrorMessage = "";
         if (email.trim() === "" || password.trim() === "") {
             setErrorMessage("Empty fields!");
+            localErrorMessage = "Empty fields!";
             return;
         }
-        else setErrorMessage("");
+        else {
+            localErrorMessage = "";
+            setErrorMessage("");
+        }
 
         //TO DO: backend login 
         // set error message if login failed -> setErrorMessage("Wrong username or password!")
         //localStorage.setItem("userId", 1); //set value for the authUser
 
-        if (errorMessage.trim()) return;
-        navigate("/products");
-    };
+        if (localErrorMessage.trim() === "") {
+            login(email, password).then((res)=>{
+                console.log(res);
+            }).catch();
+            // navigate("/products");
+        }
+    });
 
     return (
         <div className="LoginPage">

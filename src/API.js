@@ -44,6 +44,19 @@ export async function postReview(userId, productId, nrOfStars, text) {
 	return await request.response;
 }
 
+export async function login(email, password) {
+	const headers = [];
+	headers.push({ name: 'Content-Type', value: 'application/json' });
+	let user = {
+		email,
+		password
+	};
+	let request = createRequest('POST', `login`, headers);
+	const payload = JSON.stringify(user);
+	request.send(payload);
+	return await request.response;
+}
+
 export async function getProducts() {
 	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}products/`);
 }
