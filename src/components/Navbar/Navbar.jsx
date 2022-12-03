@@ -17,7 +17,9 @@ export const Navbar = () => {
 				<Link to={`/products/favorites`} favorites={0}>
 					<FavoriteBorderIcon className="Navbar-item" />
 				</Link>
-				<p className="Navbar-item">{REGISTER}</p>
+				<Link to={`/register`} className="Navbar-Link">
+					<p className="Navbar-item">{REGISTER}</p>
+				</Link>
 				{!localStorage.getItem("userId") &&
 					<Link to={`/login`} className="Navbar-Link">
 						<p className="Navbar-item">{SIGN_IN}</p>
