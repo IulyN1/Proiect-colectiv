@@ -10,10 +10,11 @@ const App = () => {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<ProductsPage favorites={1} />} />
-				<Route path="/products" element={<ProductsPage favorites={1} />} />
+				<Route path="/" element={<ProductsPage productsType={"ALL_PRODUCTS"} />} />
+				<Route path="/products" element={<ProductsPage productsType={"ALL_PRODUCTS"} />} />
 				<Route path="/products/:id" element={<ProductPage />} />
-				<Route path="/products/favorites" element={<ProductsPage favorites={0} />} />
+				<Route path="/products/favorites" element={<ProductsPage productsType={"FAVORITES"} />} />
+				<Route path="/products/watchlist" element={<ProductsPage productsType={"WATCHLIST"} />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
 			</Routes>
