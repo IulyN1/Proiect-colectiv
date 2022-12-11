@@ -8,14 +8,14 @@ import { ProductAvgReview } from '../ProductAvgReview/ProductAvgReview';
 export const Product = () => {
 	const location = useLocation();
 	const product = location.state.product;
-	const favorite = location.state.favorite;
+	const productType = location.state.productType;
 
 	return (
 		<div className="Product">
 			<p className="Rounded">
 				<span className="ProductFavoriteLabel">Favorite</span>
 				<span className="ProductInteractionIcon">
-					<Favorite product={product} favorite={favorite} />
+					<Favorite product={product} productType={productType} />
 				</span>
 			</p>
 			<p>
