@@ -13,7 +13,7 @@ export const Products = ({ productsType }) => {
 			let fetchItems = productsType === ProductsType.Favorites ? await getFavorites(1) : productsType === ProductsType.AllProducts ? await getProducts() : await getWatchlist(1);
 			setProducts(JSON.parse(await fetchItems.text()));
 		})();
-	}, [products]);
+	}, [productsType]);
 
 	return (
 		<div className="Products">
