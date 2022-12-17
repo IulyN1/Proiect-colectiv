@@ -4,6 +4,7 @@ import './Product.css';
 import Favorite from '../Favorite';
 import { ReviewList } from '../ReviewList/ReviewList';
 import { ProductAvgReview } from '../ProductAvgReview/ProductAvgReview';
+import AddToWatchlist from "../AddToWatchlist/AddToWatchlist";
 
 export const Product = () => {
 	const location = useLocation();
@@ -12,6 +13,9 @@ export const Product = () => {
 
 	return (
 		<div className="Product">
+			<AddToWatchlist
+				product = {product}
+			/>
 			<p className="Rounded">
 				<span className="ProductFavoriteLabel">Favorite</span>
 				<span className="ProductInteractionIcon">
