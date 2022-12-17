@@ -73,6 +73,20 @@ export async function login(email, password){
 	return await response.json();
 }
 
+export async function addToWatchlist(uid, product){
+	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}${uid}/watchlist`, {
+		method: 'POST',
+		body: JSON.stringify({
+			product
+		}),
+		headers: {
+			'Content-Type': 'application/json',
+			Accept: 'application/json',
+		},
+	});
+	return await response.json();
+}
+
 export async function getProducts() {
 	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}products/`);
 }
