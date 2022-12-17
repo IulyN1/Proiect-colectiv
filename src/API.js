@@ -44,6 +44,20 @@ export async function postReview(userId, productId, nrOfStars, text) {
 	return await request.response;
 }
 
+export async function postUser(name, email, password) {
+	const headers = [];
+	headers.push({ name: 'Content-Type', value: 'application/json' });
+	let userData = {
+		name,
+		email,
+		password
+	};
+	let request = createRequest('POST', `users`, headers);
+	const payload = JSON.stringify(userData);
+	request.send(payload);
+	return await request.response;
+}
+
 // export async function login(email, password) {
 // 	const headers = [];
 // 	headers.push({ name: 'Content-Type', value: 'application/json' });
@@ -86,4 +100,8 @@ export async function getReviews(productId) {
 
 export async function getReviewsAverage(productId) {
 	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}product/${productId}/reviewsAverage`);
+}
+
+export async function getWatchlist(userId) {
+	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}${userId}/watchlist`);
 }
