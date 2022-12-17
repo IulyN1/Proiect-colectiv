@@ -34,7 +34,6 @@ export async function postReview(userId, productId, nrOfStars, text) {
 	let productReview = {
 		userId: userId,
 		productId: productId,
-		id: 0,
 		nrOfStars: nrOfStars,
 		text: text
 	};
@@ -87,6 +86,11 @@ export async function addToWatchlist(uid, product) {
 
 export async function isOnWatchlistForUID(uid, pid) {
 	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}${uid}/watchlist/${pid}`);
+	return await response.json();
+}
+
+export async function checkIfFavorite(uid, pid) {
+	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}${uid}/favorites/${pid}`);
 	return await response.json();
 }
 

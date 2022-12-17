@@ -57,7 +57,7 @@ export default function AddToWatchlist(props) {
 					/>
 				}
 				label={
-					<Box component="div" fontSize={15}>
+					<Box component="div" fontSize={16}>
 						Add to watchlist
 					</Box>
 				}

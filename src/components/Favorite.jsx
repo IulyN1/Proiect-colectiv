@@ -3,10 +3,9 @@ import { styled } from '@mui/material/styles';
 import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { postFavorite } from '../API';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ProductsType } from '../enums.ts';
+import { postFavorite, checkIfFavorite } from '../API';
 
 const StyledFavorite = styled(Rating)({
 	'& .MuiRating-iconFilled': {
@@ -17,14 +16,32 @@ const StyledFavorite = styled(Rating)({
 	}
 });
 
-export default function Favorite({ product, productType }) {
+export default function Favorite({ product }) {
 	const uid = localStorage.getItem('userId');
-	const [isFav, setIsFav] = useState(productType === ProductsType.Favorite ? true : false);
+	const [isFav, setIsFav] = useState(false);
+	const [isAlreadyFav, setIsAlreadyFav] = useState(false);
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		console.log('np');
+		if (uid) {
+			const pid = product.id;
+			checkIfFavorite(uid, pid)
+				.then((res) => {
+					if (res) {
+						setIsFav(true);
+						setIsAlreadyFav(true);
+					}
+				})
+				.catch((err) => {
+					console.log('Cannot parse to JSON!');
+				});
+		}
+	});
 
 	const handleAddToFavorites = () => {
 		if (uid) {
-			if (!isFav) {
+			if (!isAlreadyFav) {
 				postFavorite(uid, product);
 			}
 			setIsFav(!isFav);
@@ -34,6 +51,7 @@ export default function Favorite({ product, productType }) {
 		}
 	};
 
+	console.log('render');
 	return (
 		<StyledFavorite
 			name="customized-color"
