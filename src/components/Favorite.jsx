@@ -5,6 +5,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { postFavorite } from '../API';
 import { useState } from 'react';
+import { ProductsType } from '../enums.ts';
 
 const StyledFavorite = styled(Rating)({
 	'& .MuiRating-iconFilled': {
@@ -15,9 +16,9 @@ const StyledFavorite = styled(Rating)({
 	}
 });
 
-export default function Favorite({ product, favorite }) {
+export default function Favorite({ product, productType }) {
 	const temporaryUID = 1;
-	const [isFav, setIsFav] = useState(favorite === 0 ? true : false);
+	const [isFav, setIsFav] = useState(productType === ProductsType.Favorite ? true : false);
 
 	const handleAddToFavorites = () => {
 		if (!isFav) {
