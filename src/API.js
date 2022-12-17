@@ -58,19 +58,6 @@ export async function postUser(name, email, password) {
 	return await request.response;
 }
 
-// export async function login(email, password) {
-// 	const headers = [];
-// 	headers.push({ name: 'Content-Type', value: 'application/json' });
-// 	let user = {
-// 		email,
-// 		password
-// 	};
-// 	let request = createRequest('POST', `login`, headers);
-// 	const payload = JSON.stringify(user);
-// 	request.send(payload);
-// 	return await request.response;
-// }
-
 export async function login(email, password){
 	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}login`, {
 		method: 'POST',
