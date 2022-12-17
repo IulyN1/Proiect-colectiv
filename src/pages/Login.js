@@ -25,16 +25,17 @@ const Login = () => {
             setErrorMessage("");
         }
 
-        //TO DO: backend login 
-        // set error message if login failed -> setErrorMessage("Wrong username or password!")
-        //localStorage.setItem("userId", 1); //set value for the authUser
-
         if (localErrorMessage.trim() === "") {
             login(email, password).then((res)=>{
-                console.log(res === 1 ? "contul exista": "contul nu exista");
+                if ( res!== -1 ){
+                    localStorage.setItem("userId", res);
+                    navigate("/products");
+                }
+                else {
+                    setErrorMessage("Wrong username or password!");
+                }
             })
 
-            navigate("/products");
         }
     };
 
