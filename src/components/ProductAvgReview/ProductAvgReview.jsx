@@ -17,7 +17,8 @@ export const ProductAvgReview = ({ product }) => {
 		<div className="ProductAvgReview">
 			{!isNaN(avgReview) ? (
 				<span>
-					<StarIcon className="AvgReviewIcon" /> <strong>{avgReview}</strong>
+					<StarIcon className="AvgReviewIcon" fontSize="large" />{' '}
+					<span className="AvgReviewValue">{avgReview}</span>
 				</span>
 			) : null}
 		</div>

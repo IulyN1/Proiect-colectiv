@@ -1,17 +1,20 @@
 import { Button, FormControl, TextField } from '@mui/material';
 import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { BRAND, SIGN_IN } from '../constants';
 import './Login.css';
 import { login } from '../API';
 
 const Login = () => {
-	localStorage.clear();
 	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
 	const [errorMessage, setErrorMessage] = React.useState('');
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		localStorage.clear();
+	});
 
 	const handleLogin = async () => {
 		let localErrorMessage = '';
@@ -41,7 +44,9 @@ const Login = () => {
 			<FormControl className="Login-formControl">
 				<div className="Login-Title">
 					<p>{BRAND}</p>
-					<SelfImprovementIcon className="Icon" />
+					<Link to={'/products'} style={{ color: 'black' }}>
+						<SelfImprovementIcon className="Icon" />
+					</Link>
 				</div>
 				<TextField
 					className="Login-InputField"
@@ -59,6 +64,9 @@ const Login = () => {
 					onChange={(e) => setPassword(e.target.value)}
 				></TextField>
 				{errorMessage && <div className="Login-ErrorMessage">{errorMessage}</div>}
+				<Link to="/register">
+					<p>Don't have an account? Create one here</p>
+				</Link>
 				<Button className="Login-Button" onClick={handleLogin} sx={{ margin: 3, color: 'black' }}>
 					{SIGN_IN}
 				</Button>

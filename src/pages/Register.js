@@ -3,7 +3,8 @@ import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
 import { BRAND, REGISTER } from '../constants';
 import React from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import './Register.css';
 import { postUser } from '../API';
 
 const Register = () => {
@@ -32,20 +33,22 @@ const Register = () => {
 
 		if (!localErrorMessage.trim()) {
 			postUser(name.trim(), email.trim(), password.trim());
-			navigate('/products');
+			navigate('/Register');
 		}
 	};
 
 	return (
-		<div className="LoginPage">
-			<FormControl className="Login-formControl">
-				<div className="Login-Title">
+		<div className="RegisterPage">
+			<FormControl className="Register-formControl">
+				<div className="Register-Title">
 					<p>{BRAND}</p>
-					<SelfImprovementIcon className="Icon" />
+					<Link to={'/products'} style={{ color: 'black' }}>
+						<SelfImprovementIcon className="Icon" />
+					</Link>
 				</div>
 
 				<TextField
-					className="Login-InputField"
+					className="Register-InputField"
 					label="Name"
 					variant="standard"
 					required
@@ -53,7 +56,7 @@ const Register = () => {
 				></TextField>
 
 				<TextField
-					className="Login-InputField"
+					className="Register-InputField"
 					label="Email"
 					variant="standard"
 					required
@@ -110,8 +113,11 @@ const Register = () => {
 					/>
 				</FormControl>
 
-				{errorMessage && <div className="Login-ErrorMessage">{errorMessage}</div>}
-				<Button className="Login-Button" onClick={handleRegister} sx={{ margin: 3, color: 'black' }}>
+				{errorMessage && <div className="Register-ErrorMessage">{errorMessage}</div>}
+				<Link to="/login">
+					<p>Already have an account? Log in here</p>
+				</Link>
+				<Button className="Register-Button" onClick={handleRegister} sx={{ margin: 3, color: 'black' }}>
 					{REGISTER}
 				</Button>
 			</FormControl>

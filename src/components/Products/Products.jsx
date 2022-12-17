@@ -7,13 +7,19 @@ import { ProductsType } from '../../enums.ts';
 
 export const Products = ({ productsType }) => {
 	const [products, setProducts] = useState([]);
+	const uid = localStorage.getItem('userId');
 
 	useEffect(() => {
 		(async () => {
-			let fetchItems = productsType === ProductsType.Favorites ? await getFavorites(1) : productsType === ProductsType.AllProducts ? await getProducts() : await getWatchlist(1);
+			let fetchItems =
+				productsType === ProductsType.Favorites
+					? await getFavorites(uid)
+					: productsType === ProductsType.AllProducts
+					? await getProducts()
+					: await getWatchlist(uid);
 			setProducts(JSON.parse(await fetchItems.text()));
 		})();
-	}, [productsType]);
+	}, [productsType, uid]);
 
 	return (
 		<div className="Products">

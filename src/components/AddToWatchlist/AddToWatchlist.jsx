@@ -15,18 +15,24 @@ export default function AddToWatchlist(props) {
 	useEffect(() => {
 		const pid = props.product.id;
 		if (uid) {
-			isOnWatchlistForUID(uid, pid).then((res) => {
-				if (res === 1) {
-					setChecked(true);
-					setIsAlreadyWatchlisted(true);
-				}
-			});
+			isOnWatchlistForUID(uid, pid)
+				.then((res) => {
+					if (res) {
+						setChecked(true);
+						setIsAlreadyWatchlisted(true);
+					}
+				})
+				.catch((err) => {
+					console.log('Cannot parse to JSON!');
+				});
 		}
 	});
 
 	const handleAddToWatchlist = (value) => {
 		if (uid && !isAlreadyWatchlisted) {
-			addToWatchlist(uid, product);
+			addToWatchlist(uid, product).catch((err) => {
+				console.log('Cannot parse to JSON!');
+			});
 			setIsAlreadyWatchlisted(true);
 		} else if (!uid) {
 			setChecked(false);
