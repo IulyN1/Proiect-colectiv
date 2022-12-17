@@ -1,4 +1,4 @@
-import { SERVER_ADDRESS } from './constants';
+import {SERVER_ADDRESS} from './constants';
 
 const protocol = 'http://';
 const URI = '/colectiv/';
@@ -56,6 +56,21 @@ export async function postUser(name, email, password) {
 	const payload = JSON.stringify(userData);
 	request.send(payload);
 	return await request.response;
+}
+
+export async function login(email, password){
+	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}login`, {
+		method: 'POST',
+		body: JSON.stringify({
+			email,
+			password
+		}),
+		headers: {
+			'Content-Type': 'application/json',
+			Accept: 'application/json',
+		},
+	});
+	return await response.json();
 }
 
 export async function getProducts() {
