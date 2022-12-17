@@ -76,14 +76,19 @@ export async function login(email, password){
 export async function addToWatchlist(uid, product){
 	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}${uid}/watchlist`, {
 		method: 'POST',
-		body: JSON.stringify({
+		body: JSON.stringify(
 			product
-		}),
+		),
 		headers: {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
 		},
 	});
+	return await response.json();
+}
+
+export async function isOnWatchlistForUID(uid, pid){
+	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}${uid}/watchlist/${pid}`);
 	return await response.json();
 }
 

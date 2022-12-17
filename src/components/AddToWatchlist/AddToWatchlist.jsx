@@ -2,21 +2,34 @@ import {Box, Checkbox, FormControlLabel} from "@mui/material";
 import {Bookmark, BookmarkBorder} from "@mui/icons-material";
 import {useEffect, useState} from "react";
 import "./AddToWatchlist.css";
-import {addToWatchlist} from "../../API";
+import {addToWatchlist, isOnWatchlistForUID} from "../../API";
 
 export default function AddToWatchlist(props) {
 
     const [product, setProduct] = useState(props.product);
     const [checked, setChecked] = useState(false);
+    const [isAlreadyWatchlisted, setIsAlreadyWatchlisted] = useState(false);
     const uid = localStorage.getItem("userId");
 
     useEffect(()=>{
-        // implementare verificare daca este deja adaugat pe watchlist-ul userului
+        const pid = props.product.id;
+        if (uid){
+            isOnWatchlistForUID(uid,pid).then((res) => {
+                if (res === 1) {
+                    setChecked(true);
+                    setIsAlreadyWatchlisted(true);
+                }
+            });
+        }
     })
 
     const handleAddToWatchlist = (value) => {
-        if(uid){
+        if(uid && !isAlreadyWatchlisted){
             addToWatchlist(uid, product);
+            setIsAlreadyWatchlisted(true);
+        } else if (!uid) {
+            setChecked(false);
+            alert("Nu sunteti autentificat!");
         }
     }
 
