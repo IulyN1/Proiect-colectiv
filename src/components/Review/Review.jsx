@@ -1,6 +1,7 @@
 import { Button, Input, Rating } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { postReview } from '../../API';
 import './Review.css';
 
@@ -14,14 +15,20 @@ const StyledRating = styled(Rating)({
 });
 
 export const Review = ({ product }) => {
-	const temporaryUID = 1;
+	const uid = localStorage.getItem('userId');
 	const [stars, setStars] = useState(0);
 	const [reviewText, setReviewText] = useState('');
+	const navigate = useNavigate();
 
 	const handleSendReview = () => {
-		if (stars > 0) {
-			postReview(temporaryUID, product?.id, stars, reviewText);
-			window.location.reload();
+		if (uid) {
+			if (stars > 0) {
+				postReview(uid, product?.id, stars, reviewText);
+				window.location.reload();
+			}
+		} else {
+			window.alert('You need to be logged in for this operation!');
+			navigate('/login');
 		}
 	};
 
