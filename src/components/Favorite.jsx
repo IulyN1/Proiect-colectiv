@@ -5,6 +5,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { postFavorite } from '../API';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ProductsType } from '../enums.ts';
 
 const StyledFavorite = styled(Rating)({
@@ -17,14 +18,20 @@ const StyledFavorite = styled(Rating)({
 });
 
 export default function Favorite({ product, productType }) {
-	const temporaryUID = 1;
+	const uid = localStorage.getItem('userId');
 	const [isFav, setIsFav] = useState(productType === ProductsType.Favorite ? true : false);
+	const navigate = useNavigate();
 
 	const handleAddToFavorites = () => {
-		if (!isFav) {
-			postFavorite(temporaryUID, product);
+		if (uid) {
+			if (!isFav) {
+				postFavorite(uid, product);
+			}
+			setIsFav(!isFav);
+		} else {
+			window.alert('You need to be logged in for this operation!');
+			navigate('/login');
 		}
-		setIsFav(!isFav);
 	};
 
 	return (
