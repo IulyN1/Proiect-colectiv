@@ -23,7 +23,7 @@ export default function AddToWatchlist(props) {
 					}
 				})
 				.catch((err) => {
-					console.log('Cannot parse to JSON!');
+					console.log('Cannot parse response!');
 				});
 		}
 	});
@@ -31,7 +31,7 @@ export default function AddToWatchlist(props) {
 	const handleAddToWatchlist = (value) => {
 		if (uid && !isAlreadyWatchlisted) {
 			addToWatchlist(uid, product).catch((err) => {
-				console.log('Cannot parse to JSON!');
+				console.log('Cannot parse response!');
 			});
 			setIsAlreadyWatchlisted(true);
 		} else if (!uid) {

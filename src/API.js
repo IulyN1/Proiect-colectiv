@@ -17,12 +17,16 @@ function createRequest(httpMethod, path, headers) {
 	return xhttp;
 }
 
-export function postFavorite(userId, product) {
-	const headers = [];
-	headers.push({ name: 'Content-Type', value: 'application/json' });
-	let request = createRequest('POST', `${userId}/favorites`, headers);
-	const payload = JSON.stringify(product);
-	request.send(payload);
+export async function postFavorite(userId, product) {
+	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}${userId}/favorites`, {
+		method: 'POST',
+		body: JSON.stringify(product),
+		headers: {
+			'Content-Type': 'application/json',
+			Accept: 'application/json'
+		}
+	});
+	return await response.text();
 }
 
 export async function postReview(userId, productId, nrOfStars, text) {
@@ -57,6 +61,12 @@ export async function postUser(name, email, password) {
 	return await request.response;
 }
 
+export async function deleteFavorite(userId, productId) {
+	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}${userId}/favorites/${productId}`, {
+		method: 'DELETE'
+	});
+}
+
 export async function login(email, password) {
 	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}login`, {
 		method: 'POST',
@@ -81,17 +91,17 @@ export async function addToWatchlist(uid, product) {
 			Accept: 'application/json'
 		}
 	});
-	return await response.json();
+	return await response.text();
 }
 
 export async function isOnWatchlistForUID(uid, pid) {
 	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}${uid}/watchlist/${pid}`);
-	return await response.json();
+	return await response.text();
 }
 
 export async function checkIfFavorite(uid, pid) {
 	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}${uid}/favorites/${pid}`);
-	return await response.json();
+	return await response.text();
 }
 
 export async function getProducts() {
