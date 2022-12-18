@@ -24,7 +24,7 @@ export const Products = ({ productsType }) => {
 	return (
 		<div className="Products">
 			{products.length > 0 ? (
-				products.map((item) => <ProductCard key={item.id} product={item} productType={productsType} />)
+				products.map((item) => <ProductCard key={item.id} product={item} />)
 			) : (
 				<p className="Products-none">{NO_PRODUCTS}</p>
 			)}

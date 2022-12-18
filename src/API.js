@@ -61,12 +61,6 @@ export async function postUser(name, email, password) {
 	return await request.response;
 }
 
-export async function deleteFavorite(userId, productId) {
-	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}${userId}/favorites/${productId}`, {
-		method: 'DELETE'
-	});
-}
-
 export async function login(email, password) {
 	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}login`, {
 		method: 'POST',
@@ -92,6 +86,23 @@ export async function addToWatchlist(uid, product) {
 		}
 	});
 	return await response.text();
+}
+
+export async function deleteFavorite(userId, productId) {
+	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}${userId}/favorites/${productId}`, {
+		method: 'DELETE'
+	});
+}
+
+export async function deleteReview(review) {
+	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}reviews/${review.id}`, {
+		method: 'DELETE',
+		body: JSON.stringify(review),
+		headers: {
+			'Content-Type': 'application/json',
+			Accept: 'application/json'
+		}
+	});
 }
 
 export async function isOnWatchlistForUID(uid, pid) {
