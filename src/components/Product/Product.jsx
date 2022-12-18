@@ -4,22 +4,19 @@ import './Product.css';
 import Favorite from '../Favorite';
 import { ReviewList } from '../ReviewList/ReviewList';
 import { ProductAvgReview } from '../ProductAvgReview/ProductAvgReview';
-import AddToWatchlist from "../AddToWatchlist/AddToWatchlist";
+import AddToWatchlist from '../AddToWatchlist/AddToWatchlist';
 
 export const Product = () => {
 	const location = useLocation();
 	const product = location.state.product;
-	const productType = location.state.productType;
 
 	return (
 		<div className="Product">
-			<AddToWatchlist
-				product = {product}
-			/>
+			<AddToWatchlist product={product} />
 			<p className="Rounded">
 				<span className="ProductFavoriteLabel">Favorite</span>
 				<span className="ProductInteractionIcon">
-					<Favorite product={product} productType={productType} />
+					<Favorite product={product} />
 				</span>
 			</p>
 			<p>
