@@ -5,7 +5,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postFavorite, checkIfFavorite } from '../API';
+import { postFavorite, deleteFavorite, checkIfFavorite } from '../API';
 
 const StyledFavorite = styled(Rating)({
 	'& .MuiRating-iconFilled': {
@@ -19,39 +19,50 @@ const StyledFavorite = styled(Rating)({
 export default function Favorite({ product }) {
 	const uid = localStorage.getItem('userId');
 	const [isFav, setIsFav] = useState(false);
-	const [isAlreadyFav, setIsAlreadyFav] = useState(false);
+	const [firstLoad, setFirstLoad] = useState(true);
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		console.log('np');
-		if (uid) {
+		if (uid && firstLoad) {
 			const pid = product.id;
 			checkIfFavorite(uid, pid)
 				.then((res) => {
 					if (res) {
 						setIsFav(true);
-						setIsAlreadyFav(true);
 					}
 				})
 				.catch((err) => {
-					console.log('Cannot parse to JSON!');
+					console.log('Cannot parse response!');
 				});
+			setFirstLoad(false);
 		}
-	});
+	}, [firstLoad, product.id, uid]);
 
 	const handleAddToFavorites = () => {
 		if (uid) {
-			if (!isAlreadyFav) {
-				postFavorite(uid, product);
+			if (!isFav) {
+				postFavorite(uid, product)
+					.then((res) => {
+						setIsFav(true);
+					})
+					.catch((err) => {
+						console.log('Cannot parse response!');
+					});
+			} else {
+				deleteFavorite(uid, product.id)
+					.then((res) => {
+						setIsFav(false);
+					})
+					.catch((err) => {
+						console.log('Cannot parse response!');
+					});
 			}
-			setIsFav(!isFav);
 		} else {
 			window.alert('You need to be logged in for this operation!');
 			navigate('/login');
 		}
 	};
 
-	console.log('render');
 	return (
 		<StyledFavorite
 			name="customized-color"
