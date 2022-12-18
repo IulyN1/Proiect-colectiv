@@ -8,8 +8,10 @@ export const ProductAvgReview = ({ product }) => {
 
 	useEffect(() => {
 		(async () => {
-			let avgReview = await getReviewsAverage(product?.id);
-			setAvgReview(JSON.parse(await avgReview.text()));
+			const response = await getReviewsAverage(product?.id);
+			const avgReview = JSON.parse(await response.text());
+			const avg = Math.round(avgReview * 100) / 100;
+			setAvgReview(avg);
 		})();
 	}, [product?.id]);
 
@@ -17,7 +19,8 @@ export const ProductAvgReview = ({ product }) => {
 		<div className="ProductAvgReview">
 			{!isNaN(avgReview) ? (
 				<span>
-					<StarIcon className="AvgReviewIcon" /> <strong>{avgReview}</strong>
+					<StarIcon className="AvgReviewIcon" fontSize="large" />{' '}
+					<span className="AvgReviewValue">{avgReview}</span>
 				</span>
 			) : null}
 		</div>
