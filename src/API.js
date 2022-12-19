@@ -134,3 +134,7 @@ export async function getReviewsAverage(productId) {
 export async function getWatchlist(userId) {
 	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}${userId}/watchlist`);
 }
+
+export async function getImageForProduct(productId) {
+	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}product/${productId}/image`);
+}

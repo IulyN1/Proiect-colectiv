@@ -7,6 +7,7 @@
 	justify-content: center;
 	background-color: #def6fe;
 	position: relative;
+	margin-bottom: 40px;
 }
 
 .Product .Rounded {
@@ -26,4 +27,15 @@
 .Product .ProductFavoriteLabel {
 	font-style: italic;
 	font-weight: 500;
+}
+
+.Product-Image {
+	height: 500px;
+	width: 450px;
+	margin-bottom: 20px;
+}
+
+.ProductDetails {
+	display: flex;
+	gap: 100px;
 }
