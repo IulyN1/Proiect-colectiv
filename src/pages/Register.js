@@ -33,7 +33,7 @@ const Register = () => {
 
 		if (!localErrorMessage.trim()) {
 			postUser(name.trim(), email.trim(), password.trim());
-			navigate('/Register');
+			navigate('/login');
 		}
 	};
 

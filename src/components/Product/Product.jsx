@@ -26,11 +26,13 @@ export const Product = () => {
 			<h3>
 				<span> {product?.name}</span>
 			</h3>
-			<div className='ProductDetails'>
-				<img className="Product-Image" src={imageSrc} alt='No image' />
+			<div className="ProductDetails">
+				<img className="Product-Image" src={imageSrc} alt={product?.name} />
 				<div>
 					<p>
-						<span><b>Price:</b> {product?.price}</span>
+						<span>
+							<b>Price:</b> {product?.price}
+						</span>
 					</p>
 					<AddToWatchlist product={product} />
 					<p className="Rounded">
@@ -38,7 +40,8 @@ export const Product = () => {
 						<span className="ProductInteractionIcon">
 							<Favorite product={product} />
 						</span>
-					</p> <br></br>
+					</p>{' '}
+					<br></br>
 					<Review product={product} />
 					<ReviewList product={product} />
 					<ProductAvgReview product={product} />

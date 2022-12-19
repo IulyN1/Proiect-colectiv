@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import './ProductCard.css';
 import { getImageForProduct } from '../../API';
 
@@ -18,7 +17,7 @@ export const ProductCard = ({ product }) => {
 	return (
 		<div className="ProductCard">
 			<Link to={`/products/${product.id}`} state={{ product }}>
-				<img className="ProductImage" src={imageSrc} alt='No image' />
+				<img className="ProductImage" src={imageSrc} alt={product?.name} />
 			</Link>
 			<p>{product?.name}</p>
 		</div>
