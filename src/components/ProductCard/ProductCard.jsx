@@ -1,17 +1,26 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import './ProductCard.css';
+import { getImageForProduct } from '../../API';
 
 export const ProductCard = ({ product }) => {
+	const [imageSrc, setImageSrc] = React.useState('');
+
+	React.useEffect(() => {
+		(async () => {
+			const response = await getImageForProduct(product?.id);
+			const responseText = await response.text();
+			setImageSrc(`data:image/png;base64,${responseText}`);
+		})();
+	}, [product]);
+
 	return (
 		<div className="ProductCard">
-			<p>{product?.name}</p>
 			<Link to={`/products/${product.id}`} state={{ product }}>
-				<span>View more details</span>
-				<span className="ArrowIcon">
-					<ArrowForwardIcon />
-				</span>
+				<img className="ProductImage" src={imageSrc} alt='No image' />
 			</Link>
+			<p>{product?.name}</p>
 		</div>
 	);
 };
