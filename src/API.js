@@ -88,6 +88,12 @@ export async function addToWatchlist(uid, product) {
 	return await response.text();
 }
 
+export async function deleteFromWatchlist(userId, productId) {
+	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}${userId}/watchlist/${productId}`, {
+		method: 'DELETE'
+	});
+}
+
 export async function deleteFavorite(userId, productId) {
 	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}${userId}/favorites/${productId}`, {
 		method: 'DELETE'
