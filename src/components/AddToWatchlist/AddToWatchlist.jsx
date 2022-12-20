@@ -3,7 +3,7 @@ import { Bookmark, BookmarkBorder } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AddToWatchlist.css';
-import { addToWatchlist, isOnWatchlistForUID } from '../../API';
+import {addToWatchlist, deleteFromWatchlist, isOnWatchlistForUID} from '../../API';
 
 export default function AddToWatchlist(props) {
 	const product = props.product;
@@ -29,12 +29,20 @@ export default function AddToWatchlist(props) {
 	});
 
 	const handleAddToWatchlist = (value) => {
-		if (uid && !isAlreadyWatchlisted) {
-			addToWatchlist(uid, product).catch((err) => {
-				console.log('Cannot parse response!');
-			});
-			setIsAlreadyWatchlisted(true);
-		} else if (!uid) {
+		if (uid) {
+			if(!isAlreadyWatchlisted){
+				addToWatchlist(uid, product).catch((err) => {
+					console.log('Cannot parse response!');
+				});
+				setIsAlreadyWatchlisted(true);
+			}else{
+				const pid = props.product.id;
+				deleteFromWatchlist(uid, pid).catch((err) => {
+					console.log('Cannot parse response!');
+				});
+				setIsAlreadyWatchlisted(false);
+			}
+		} else {
 			setChecked(false);
 			window.alert('You need to be logged in for this operation!');
 			navigate('/login');
