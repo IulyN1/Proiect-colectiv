@@ -23,8 +23,9 @@ export const Review = ({ product }) => {
 	const handleSendReview = () => {
 		if (uid) {
 			if (stars > 0) {
-				postReview(uid, product?.id, stars, reviewText);
-				window.location.reload();
+				postReview(uid, product?.id, stars, reviewText).then((res) => {
+					window.location.reload();
+				});
 			}
 		} else {
 			window.alert('You need to be logged in for this operation!');

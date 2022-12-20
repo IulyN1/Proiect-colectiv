@@ -3,12 +3,11 @@ import { Bookmark, BookmarkBorder } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AddToWatchlist.css';
-import {addToWatchlist, deleteFromWatchlist, isOnWatchlistForUID} from '../../API';
+import { addToWatchlist, deleteFromWatchlist, isOnWatchlistForUID } from '../../API';
 
 export default function AddToWatchlist(props) {
 	const product = props.product;
 	const [checked, setChecked] = useState(false);
-	const [isAlreadyWatchlisted, setIsAlreadyWatchlisted] = useState(false);
 	const uid = localStorage.getItem('userId');
 	const navigate = useNavigate();
 
@@ -19,7 +18,6 @@ export default function AddToWatchlist(props) {
 				.then((res) => {
 					if (res) {
 						setChecked(true);
-						setIsAlreadyWatchlisted(true);
 					}
 				})
 				.catch((err) => {
@@ -30,17 +28,17 @@ export default function AddToWatchlist(props) {
 
 	const handleAddToWatchlist = (value) => {
 		if (uid) {
-			if(!isAlreadyWatchlisted){
+			if (!checked) {
 				addToWatchlist(uid, product).catch((err) => {
 					console.log('Cannot parse response!');
 				});
-				setIsAlreadyWatchlisted(true);
-			}else{
+				setChecked(true);
+			} else {
 				const pid = props.product.id;
 				deleteFromWatchlist(uid, pid).catch((err) => {
 					console.log('Cannot parse response!');
 				});
-				setIsAlreadyWatchlisted(false);
+				setChecked(false);
 			}
 		} else {
 			setChecked(false);

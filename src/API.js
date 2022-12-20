@@ -33,18 +33,21 @@ export async function postReview(userId, productId, nrOfStars, text) {
 	if (!text) {
 		return;
 	}
-	const headers = [];
-	headers.push({ name: 'Content-Type', value: 'application/json' });
 	let productReview = {
 		userId: userId,
 		productId: productId,
 		nrOfStars: nrOfStars,
 		text: text
 	};
-	let request = createRequest('POST', `reviews`, headers);
-	const payload = JSON.stringify(productReview);
-	request.send(payload);
-	return await request.response;
+	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}reviews`, {
+		method: 'POST',
+		body: JSON.stringify(productReview),
+		headers: {
+			'Content-Type': 'application/json',
+			Accept: 'application/json'
+		}
+	});
+	return await response.text();
 }
 
 export async function postUser(name, email, password) {
