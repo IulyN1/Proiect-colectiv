@@ -5,6 +5,7 @@ import ProductPage from './pages/ProductPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from "./pages/Register";
+import CartPage from "./pages/CartPage";
 
 const App = () => {
 	return (
@@ -15,6 +16,7 @@ const App = () => {
 				<Route path="/products/:id" element={<ProductPage />} />
 				<Route path="/products/favorites" element={<ProductsPage productsType={"FAVORITES"} />} />
 				<Route path="/products/watchlist" element={<ProductsPage productsType={"WATCHLIST"} />} />
+				<Route path="/products/cart" element={<CartPage productsType={"CART"} />}/>
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
 			</Routes>

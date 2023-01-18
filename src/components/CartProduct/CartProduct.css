@@ -1,0 +1,29 @@
+.CartProduct {
+    margin: 10px;
+    width: 90%;
+    height: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0px 10px 20px #1687d933;
+    padding: 0 15px;
+
+}
+
+.CartProduct-prices{
+    height: 100%;
+    text-align: right;
+    margin-left: auto;
+}
+
+.CartProduct-Delete{
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.CartProduct-Delete:hover{
+    color: red;
+}
