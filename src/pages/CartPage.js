@@ -99,18 +99,6 @@ const CartPage = () => {
         itemsCounter();
     }, [produse]);
 
-    console.log(produse);
-
-    const clearCart = () => {
-        setProduse([]);
-    }
-
-    const onClickDeleteProduct = (id) => {
-        let localProduse = produse;
-        localProduse = localProduse.filter((produs) => produs.id !== id);
-        setProduse(localProduse);
-    }
-
     return (
         <div className="CartPage">
             <Navbar />
@@ -119,7 +107,6 @@ const CartPage = () => {
                 <div className={"CartPage-shopping-cart"}>
                     <div className="CartPage-Header">
                         <h3 className="CartPage-Heading">Shopping Cart</h3>
-                        <h5 className="CartPage-Action" onClick={clearCart}>Remove all</h5>
                     </div>
                     <div className="CartPage-items">
                         {produse.map(produs =>
@@ -128,7 +115,6 @@ const CartPage = () => {
                                 name={produs.name}
                                 price={produs.price}
                                 image={produs.image}
-                                onDelete={onClickDeleteProduct}
                             />
                         )}
                     </div>

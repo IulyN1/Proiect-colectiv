@@ -1,11 +1,7 @@
 import "./CartProduct.css";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export const CartProduct = ({id, name, price, image, onDelete}) => {
-
-    const deleteItem = () => {
-        onDelete(id);
-    }
+export const CartProduct = ({id, name, price, image}) => {
 
     return (
         <div className="CartProduct">
@@ -17,12 +13,6 @@ export const CartProduct = ({id, name, price, image, onDelete}) => {
             </span>
             <span className="CartProduct-counter"></span>
             <span className="CartProduct-prices">{price} RON</span>
-            <span>
-                <DeleteIcon
-                    className={"CartProduct-Delete"}
-                    onClick={deleteItem}
-                />
-            </span>
         </div>
     );
 }
