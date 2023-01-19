@@ -31,7 +31,7 @@ export const Product = () => {
 				<div>
 					<p>
 						<span>
-							<b>Price:</b> {product?.price}
+							<b>Price:</b> {product?.price + ' RON'}
 						</span>
 					</p>
 					<AddToWatchlist product={product} />

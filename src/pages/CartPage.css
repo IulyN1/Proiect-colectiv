@@ -1,74 +1,77 @@
-.CartPage-body{
-    margin: 0;
-    background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.CartPage {
+	position: relative;
+	margin: 0;
+	padding-bottom: 10rem;
+	min-height: 100vh;
+}
+.CartPage-body {
+	margin: 0;
+	background: linear-gradient(to bottom right, #e3f0ff, #fafcff);
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .CartPage-shopping-cart {
-    width: 70%;
-    height: 90%;
-    background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0px 10px 20px #1687d933;
-    overflow-y: scroll;
+	width: 70%;
+	height: 90%;
+	background-color: #ffffff;
+	border-radius: 20px;
+	box-shadow: 0px 10px 20px #1687d933;
+	overflow-y: scroll;
 }
 
-.CartPage-Header{
-    margin: auto;
-    width: 90%;
-    height: 15%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.CartPage-Header {
+	margin: auto;
+	width: 90%;
+	height: 15%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
-.CartPage-Heading{
-    font-size: 20px;
-    font-family: 'Open Sans', serif;
-    font-weight: 700;
-    color: #2F3841;
+.CartPage-Heading {
+	font-size: 20px;
+	font-family: 'Open Sans', serif;
+	font-weight: 700;
+	color: #2f3841;
 }
 
-.CartPage-Action{
-    font-size: 14px;
-    font-family: 'Open Sans', serif;
-    font-weight: 600;
-    color: #E44C4C;
-    cursor: pointer;
-    border-bottom: 1px solid #E44C4C;
+.CartPage-Action {
+	font-size: 14px;
+	font-family: 'Open Sans', serif;
+	font-weight: 600;
+	color: #e44c4c;
+	cursor: pointer;
+	border-bottom: 1px solid #e44c4c;
 }
 
-.CartPage-Items{
+.CartPage-checkout {
+	float: right;
+	margin-right: 5%;
+	width: 28%;
 }
-
-.CartPage-checkout{
-    float: right;
-    margin-right: 5%;
-    width: 28%;
+.CartPage-total {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
 }
-.CartPage-total{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+.CartPage-Subtotal {
+	font-size: 22px;
+	font-family: 'Open Sans', serif;
+	font-weight: 700;
+	color: #202020;
 }
-.CartPage-Subtotal{
-    font-size: 22px;
-    font-family: 'Open Sans', serif;
-    font-weight: 700;
-    color: #202020;
+.CartPage-items-counter {
+	font-size: 16px;
+	font-family: 'Open Sans', serif;
+	font-weight: 500;
+	color: #909090;
+	line-height: 10px;
 }
-.CartPage-items-counter{
-    font-size: 16px;
-    font-family: 'Open Sans', serif;
-    font-weight: 500;
-    color: #909090;
-    line-height: 10px;
-}
-.CartPage-total-amount{
-    font-size: 36px;
-    font-family: 'Open Sans', serif;
-    font-weight: 900;
-    color: #202020;
+.CartPage-total-amount {
+	font-size: 36px;
+	font-family: 'Open Sans', serif;
+	font-weight: 900;
+	color: #202020;
 }
