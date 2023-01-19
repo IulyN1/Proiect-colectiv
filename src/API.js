@@ -159,3 +159,7 @@ export async function getWatchlist(userId) {
 export async function getImageForProduct(productId) {
 	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}product/${productId}/image`);
 }
+
+export async function getCartProducts(userId) {
+	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}${userId}/cart`);
+}
