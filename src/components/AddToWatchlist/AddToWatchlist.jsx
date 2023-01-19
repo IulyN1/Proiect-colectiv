@@ -6,14 +6,14 @@ import './AddToWatchlist.css';
 import { addToWatchlist, deleteFromWatchlist, isOnWatchlistForUID } from '../../API';
 
 export default function AddToWatchlist(props) {
+	const uid = localStorage.getItem('userId');
 	const product = props.product;
 	const [checked, setChecked] = useState(false);
-	const uid = localStorage.getItem('userId');
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const pid = props.product.id;
 		if (uid) {
+			const pid = props.product.id;
 			isOnWatchlistForUID(uid, pid)
 				.then((res) => {
 					if (res) {

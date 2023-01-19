@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -7,23 +6,14 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postFavorite, deleteFavorite, checkIfFavorite } from '../API';
 
-const StyledFavorite = styled(Rating)({
-	'& .MuiRating-iconFilled': {
-		color: '#ff4538'
-	},
-	'& .MuiRating-iconHover': {
-		color: '#ff4538'
-	}
-});
-
-export default function Favorite({ product }) {
+export default function Favorite(props) {
 	const uid = localStorage.getItem('userId');
+	const product = props.product;
 	const [isFav, setIsFav] = useState(false);
-	const [firstLoad, setFirstLoad] = useState(true);
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (uid && firstLoad) {
+		if (uid) {
 			const pid = product.id;
 			checkIfFavorite(uid, pid)
 				.then((res) => {
@@ -34,43 +24,49 @@ export default function Favorite({ product }) {
 				.catch((err) => {
 					console.log('Cannot parse response!');
 				});
-			setFirstLoad(false);
 		}
-	}, [firstLoad, product.id, uid]);
+	});
 
 	const handleAddToFavorites = () => {
 		if (uid) {
 			if (!isFav) {
-				postFavorite(uid, product)
-					.then((res) => {
-						setIsFav(true);
-					})
-					.catch((err) => {
-						console.log('Cannot parse response!');
-					});
+				postFavorite(uid, product).catch((err) => {
+					console.log('Cannot parse response!');
+				});
+				setIsFav(true);
 			} else {
-				deleteFavorite(uid, product.id)
-					.then((res) => {
-						setIsFav(false);
-					})
-					.catch((err) => {
-						console.log('Cannot parse response!');
-					});
+				const pid = product.id;
+				deleteFavorite(uid, pid).catch((err) => {
+					console.log('Cannot parse response!');
+				});
+				setIsFav(false);
 			}
 		} else {
+			setIsFav(false);
 			window.alert('You need to be logged in for this operation!');
 			navigate('/login');
 		}
 	};
 
 	return (
-		<StyledFavorite
+		<Rating
+			sx={{
+				'& .MuiRating-iconFilled': {
+					color: '#ff4538'
+				},
+				'& .MuiRating-iconHover': {
+					color: '#ff4538'
+				}
+			}}
 			name="customized-color"
 			value={isFav ? 1 : 0}
 			max={1}
 			icon={<FavoriteIcon fontSize="inherit" />}
 			emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
-			onClick={() => handleAddToFavorites()}
+			onChange={() => {
+				setIsFav(!isFav);
+				handleAddToFavorites();
+			}}
 		/>
 	);
 }
