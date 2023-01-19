@@ -6,6 +6,7 @@ import { BRAND, REGISTER, SIGN_IN } from '../../constants';
 import { Link } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Tooltip from '@mui/material/Tooltip';
 
 export const Navbar = () => {
@@ -31,6 +32,11 @@ export const Navbar = () => {
 				<Tooltip title="Watchlist">
 					<Link to={`/products/watchlist`} productsType={'WATCHLIST'}>
 						<VisibilityIcon className="Navbar-item" />
+					</Link>
+				</Tooltip>
+				<Tooltip title="Cart">
+					<Link to={`/products/cart`} productsType={'CART'}>
+						<ShoppingCartIcon className="Navbar-item" />
 					</Link>
 				</Tooltip>
 				{!localStorage.getItem('userId') && (
