@@ -6,12 +6,16 @@ import Favorite from '../Favorite';
 import { ReviewList } from '../ReviewList/ReviewList';
 import { ProductAvgReview } from '../ProductAvgReview/ProductAvgReview';
 import AddToWatchlist from '../AddToWatchlist/AddToWatchlist';
-import { getImageForProduct } from '../../API';
+import { getImageForProduct, postShoppingCart } from '../../API';
+import { Button } from '@mui/material';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 export const Product = () => {
+	const uid = localStorage.getItem('userId');
 	const location = useLocation();
 	const product = location.state.product;
 	const [imageSrc, setImageSrc] = React.useState('');
+	const [isDisabled, setIsDisabled] = React.useState(false);
 
 	React.useEffect(() => {
 		(async () => {
@@ -19,7 +23,38 @@ export const Product = () => {
 			const responseText = await response.text();
 			setImageSrc(`data:image/png;base64,${responseText}`);
 		})();
+
+		product.nrInStock > 0 ? setIsDisabled(false) : setIsDisabled(true);
 	}, [product]);
+
+	const addToCart = () => {
+		postShoppingCart(uid, product)
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((err) => {
+				console.log('Cannot parse response!');
+			});
+	};
+
+	const buttonSX = {
+		borderColor: "#51d3ac",
+		backgroundColor: "#51d3ac",
+		display: "flex",
+		justifyContent: "space-between",
+		color: "black",
+		width: "150px",
+		height: "40px",
+		marginBottom:"40px",
+		"&:hover": {
+			backgroundColor: "#26e9ae",
+			borderColor: "#26e9ae",
+		},
+		"&:disabled": {
+			backgroundColor: "#909596",
+			borderColor: "#909596",
+		}
+	};
 
 	return (
 		<div className="Product">
@@ -34,6 +69,7 @@ export const Product = () => {
 							<b>Price:</b> {product?.price + ' RON'}
 						</span>
 					</p>
+					<Button sx={buttonSX} onClick={() => addToCart()} disabled={isDisabled}>ADD TO CART <AddShoppingCartIcon /></Button>
 					<AddToWatchlist product={product} />
 					<p className="Rounded">
 						<span className="ProductFavoriteLabel">Favorite</span>

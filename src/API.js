@@ -50,6 +50,18 @@ export async function postReview(userId, productId, nrOfStars, text) {
 	return await response.text();
 }
 
+export async function postShoppingCart(userId, product) {
+	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}${userId}/shoppingcart`, {
+		method: 'POST',
+		body: JSON.stringify(product),
+		headers: {
+			'Content-Type': 'application/json',
+			Accept: 'application/json'
+		}
+	});
+	return await response.text();
+}
+
 export async function postUser(name, email, password) {
 	const headers = [];
 	headers.push({ name: 'Content-Type', value: 'application/json' });
