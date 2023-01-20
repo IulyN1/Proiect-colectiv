@@ -34,11 +34,10 @@ export async function postReview(userId, productId, nrOfStars, text) {
 		return;
 	}
 	let productReview = {
-		userId: parseInt(userId),
+		userId: userId,
 		productId: productId,
 		nrOfStars: nrOfStars,
-		text: text,
-		id: 0
+		text: text
 	};
 	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}reviews`, {
 		method: 'POST',
@@ -131,6 +130,13 @@ export async function deleteItemFromCart(uid, pid) {
 	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}${uid}/cart/${pid}`, {
 		method: 'DELETE'
 	});
+}
+
+export async function buyItemsFromCart(uid) {
+	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}${uid}/cart`, {
+		method: 'DELETE'
+	});
+	return await response.text();
 }
 
 export async function isOnWatchlistForUID(uid, pid) {
