@@ -85,7 +85,8 @@
 	flex-direction: row-reverse;
 }
 
-.CartPage-out-of-stock {
+.CartPage-right-label {
 	display: flex;
 	flex-direction: row-reverse;
+	margin-top: 2px;
 }

@@ -9,6 +9,7 @@ import { CartProduct } from '../components/CartProduct/CartProduct';
 import { NO_PRODUCTS } from '../constants';
 import { deleteItemFromCart, getCartProducts, buyItemsFromCart } from '../API';
 import { Button } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const CartPage = () => {
 	const uid = localStorage.getItem('userId');
@@ -16,6 +17,7 @@ const CartPage = () => {
 	const [itemsNo, setItemsNo] = useState(0);
 	const [produse, setProduse] = useState([]);
 	const [outOfStock, setOutOfStock] = useState(false);
+	const [isFetching, setIsFetching] = useState(false);
 	const navigate = useNavigate();
 
 	React.useEffect(() => {
@@ -75,12 +77,15 @@ const CartPage = () => {
 	};
 
 	const buyProducts = () => {
+		setIsFetching(true);
 		buyItemsFromCart(uid)
 			.then(() => {
+				setIsFetching(false);
 				alert('Thanks for your order!');
 				navigate('/products');
 			})
 			.catch(() => {
+				setIsFetching(false);
 				console.log("Couldn't complete buy request!");
 			});
 	};
@@ -141,14 +146,21 @@ const CartPage = () => {
 							<div className="CartPage-total-amount">{total} RON</div>
 						</div>
 						{produse.length > 0 ? (
-							<div className="CartPage-buy-btn">
-								<Button sx={buttonSX} onClick={() => buyProducts()} disabled={outOfStock}>
-									BUY
-								</Button>
-							</div>
+							<>
+								<div className="CartPage-buy-btn">
+									<Button sx={buttonSX} onClick={() => buyProducts()} disabled={outOfStock}>
+										BUY
+									</Button>
+								</div>
+								{isFetching ? (
+									<span className="CartPage-right-label">
+										<CircularProgress />
+									</span>
+								) : null}
+							</>
 						) : null}
 						{produse.length > 0 && outOfStock ? (
-							<span className="CartPage-out-of-stock">One of the products is out of stock!</span>
+							<span className="CartPage-right-label">One of the products is out of stock!</span>
 						) : null}
 					</div>
 				</div>
