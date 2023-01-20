@@ -1,9 +1,14 @@
 import './CartProduct.css';
 import React from 'react';
 import { getImageForProduct } from '../../API';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-export const CartProduct = ({ id, name, price }) => {
+export const CartProduct = ({ id, name, price, onDelete }) => {
 	const [imgSrc, setImgSrc] = React.useState('');
+
+	const deleteItem = () => {
+		onDelete(id);
+	}
 
 	React.useEffect(() => {
 		(async () => {
@@ -23,6 +28,12 @@ export const CartProduct = ({ id, name, price }) => {
 			</span>
 			<span className="CartProduct-counter"></span>
 			<span className="CartProduct-prices">{price} RON</span>
+			<span>
+                <DeleteIcon
+					className={"CartProduct-Delete"}
+					onClick={deleteItem}
+				/>
+            </span>
 		</div>
 	);
 };
