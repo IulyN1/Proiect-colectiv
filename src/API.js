@@ -34,10 +34,11 @@ export async function postReview(userId, productId, nrOfStars, text) {
 		return;
 	}
 	let productReview = {
-		userId: userId,
+		userId: parseInt(userId),
 		productId: productId,
 		nrOfStars: nrOfStars,
-		text: text
+		text: text,
+		id: 0
 	};
 	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}reviews`, {
 		method: 'POST',
@@ -132,13 +133,6 @@ export async function deleteItemFromCart(uid, pid) {
 	});
 }
 
-export async function buyItemsFromCart(uid) {
-	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}${uid}/cart`, {
-		method: 'DELETE'
-	});
-	return await response.text();
-}
-
 export async function isOnWatchlistForUID(uid, pid) {
 	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}${uid}/watchlist/${pid}`);
 	return await response.text();
@@ -175,4 +169,8 @@ export async function getImageForProduct(productId) {
 
 export async function getCartProducts(userId) {
 	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}${userId}/cart`);
+}
+
+export async function getCartProductForUser(userId, productId){
+	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}${userId}/cart/${productId}`);
 }
