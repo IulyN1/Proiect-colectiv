@@ -79,3 +79,13 @@
 .CartPage .Products-none {
 	margin-left: 20px;
 }
+
+.CartPage-buy-btn {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.CartPage-out-of-stock {
+	display: flex;
+	flex-direction: row-reverse;
+}

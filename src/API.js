@@ -132,6 +132,13 @@ export async function deleteItemFromCart(uid, pid) {
 	});
 }
 
+export async function buyItemsFromCart(uid) {
+	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}${uid}/cart`, {
+		method: 'DELETE'
+	});
+	return await response.text();
+}
+
 export async function isOnWatchlistForUID(uid, pid) {
 	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}${uid}/watchlist/${pid}`);
 	return await response.text();
