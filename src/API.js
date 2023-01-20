@@ -126,6 +126,12 @@ export async function deleteReview(review) {
 	});
 }
 
+export async function deleteItemFromCart(uid, pid) {
+	return await fetch(`${protocol}${SERVER_ADDRESS}${URI}${uid}/cart/${pid}`, {
+		method: 'DELETE'
+	});
+}
+
 export async function isOnWatchlistForUID(uid, pid) {
 	const response = await fetch(`${protocol}${SERVER_ADDRESS}${URI}${uid}/watchlist/${pid}`);
 	return await response.text();

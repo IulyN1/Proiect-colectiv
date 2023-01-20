@@ -16,4 +16,13 @@
     text-align: right;
     margin-left: auto;
 }
+.CartProduct-Delete{
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
 
+.CartProduct-Delete:hover{
+    color: red;
+}
